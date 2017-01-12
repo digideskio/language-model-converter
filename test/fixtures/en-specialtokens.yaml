@@ -1,0 +1,9 @@
+list.${country}:
+  - Spain
+  - France
+
+my.test.intent:
+  # a comma next to the entity
+  - "[${country}:country], great country"
+  # a question mark next to the entity
+  - are you from [${country}:country]?

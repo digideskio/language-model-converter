@@ -347,6 +347,60 @@ describe('Language Model Converter', () => {
         expect(luisModel.utterances).to.eql(expectedUtterances);
     });
 
+    it('should parse a valid yaml file with special tokens', () => {
+        let parser = new LanguageModelParser();
+        let luisModel = parser.parse(['./test/fixtures/en-specialtokens.yaml'], 'en-us');
+
+        let expectedUtterances = [
+            {
+                text: 'spain, great country',
+                intent: 'my.test.intent',
+                entities: [
+                    {
+                        entity: 'country',
+                        startPos: 0,
+                        endPos: 0
+                    }
+                ]
+            },
+            {
+                text: 'france, great country',
+                intent: 'my.test.intent',
+                entities: [
+                    {
+                        entity: 'country',
+                        startPos: 0,
+                        endPos: 0
+                    }
+                ]
+            },
+            {
+                text: 'are you from spain?',
+                intent: 'my.test.intent',
+                entities: [
+                    {
+                        entity: 'country',
+                        startPos: 3,
+                        endPos: 3
+                    }
+                ]
+            },
+            {
+                text: 'are you from france?',
+                intent: 'my.test.intent',
+                entities: [
+                    {
+                        entity: 'country',
+                        startPos: 3,
+                        endPos: 3
+                    }
+                ]
+            }
+        ];
+
+        expect(luisModel.utterances).to.eql(expectedUtterances);
+    });
+
     it('should parse phraselists', function() {
         let parser = new LanguageModelParser();
         let yamls = [
